@@ -96,82 +96,100 @@ function Browse() {
   if (error) return <p style={{ color: 'red' }}>{error}</p>;
 
   return (
-    <div className="browse-container">
-      <motion.h2 className="browse-heading" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-        Find Available Food Near You
-      </motion.h2>
-
-      <input
-        className="search-input"
-        type="text"
-        placeholder="Search food by name or description..."
-        value={search}
-        onChange={handleSearch}
+    <div className="browse-container relative min-h-screen px-4 py-8">
+      {/* Background Image */}
+      <img
+        src="/backgrounds/browse.jpg"
+        alt="Browse Background"
+        className="fixed top-0 left-0 w-full h-full object-cover z-0"
       />
 
-      {filteredItems.length === 0 && <p>No food items found.</p>}
+      {/* Overlay */}
+      <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10"></div>
 
-      {filteredItems.map(item => (
-        <motion.div
-          key={item._id}
-          className="food-card"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-        >
-          <h3 className="food-title">{item.title}</h3>
-          <p className="food-description">{item.description}</p>
-          <p className="food-donor">Donor: {item.donor?.name || 'Anonymous'}</p>
-          <p className="food-units">Units: {item.quantity}</p>
-          {item.expiryTime && (
-            <p className="food-expiry">⏰ {calculateTimeLeft(item.expiryTime)}</p>
-          )}
+      {/* Content */}
+      <motion.div
+        className="relative z-20 max-w-5xl mx-auto"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h2 className="browse-heading text-white mb-6 text-center text-4xl font-bold">
+          Find Available Food Near You
+        </h2>
 
-          {item.pickupLocation?.coordinates && (
-            <div className="mini-map">
-              <MapContainer
-                center={[
-                  item.pickupLocation.coordinates[1],
-                  item.pickupLocation.coordinates[0]
-                ]}
-                zoom={13}
-                scrollWheelZoom={false}
-                style={{ height: "200px", width: "100%", borderRadius: "10px" }}
-              >
-                <TileLayer
-                  attribution='&copy; OpenStreetMap contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Marker
-                  position={[
+        <input
+          className="search-input mb-8 w-full max-w-md mx-auto block p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+          type="text"
+          placeholder="Search food by name or description..."
+          value={search}
+          onChange={handleSearch}
+        />
+
+        {filteredItems.length === 0 && <p className="text-white text-center">No food items found.</p>}
+
+        {filteredItems.map(item => (
+          <motion.div
+            key={item._id}
+            className="food-card bg-white bg-opacity-90 rounded-lg shadow-lg p-6 mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <h3 className="food-title text-green-700 font-semibold text-xl mb-2">{item.title}</h3>
+            <p className="food-description text-gray-700 mb-1">{item.description}</p>
+            <p className="food-donor text-gray-600 mb-1">Donor: {item.donor?.name || 'Anonymous'}</p>
+            <p className="food-units text-gray-600 mb-1">Units: {item.quantity}</p>
+            {item.expiryTime && (
+              <p className="food-expiry text-gray-600 mb-2">⏰ {calculateTimeLeft(item.expiryTime)}</p>
+            )}
+
+            {item.pickupLocation?.coordinates && (
+              <div className="mini-map mb-4 rounded-lg overflow-hidden">
+                <MapContainer
+                  center={[
                     item.pickupLocation.coordinates[1],
                     item.pickupLocation.coordinates[0]
                   ]}
+                  zoom={13}
+                  scrollWheelZoom={false}
+                  style={{ height: "200px", width: "100%" }}
                 >
-                  <Popup>Pickup Location</Popup>
-                </Marker>
-              </MapContainer>
-            </div>
-          )}
+                  <TileLayer
+                    attribution='&copy; OpenStreetMap contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+                  <Marker
+                    position={[
+                      item.pickupLocation.coordinates[1],
+                      item.pickupLocation.coordinates[0]
+                    ]}
+                  >
+                    <Popup>Pickup Location</Popup>
+                  </Marker>
+                </MapContainer>
+              </div>
+            )}
 
-          <div className="claim-controls">
-            <input
-              type="number"
-              min="1"
-              placeholder="Qty"
-              value={claimQuantity[item._id] || ""}
-              onChange={e => setClaimQuantity({ ...claimQuantity, [item._id]: e.target.value })}
-              className="claim-input"
-            />
-            <button
-              className="claim-button"
-              onClick={() => handleClaim(item._id, parseInt(item.quantity))}
-            >
-              Claim
-            </button>
-          </div>
-        </motion.div>
-      ))}
+            <div className="claim-controls flex items-center space-x-3">
+              <input
+                type="number"
+                min="1"
+                placeholder="Qty"
+                value={claimQuantity[item._id] || ""}
+                onChange={e => setClaimQuantity({ ...claimQuantity, [item._id]: e.target.value })}
+                className="claim-input border border-gray-300 rounded px-3 py-1 w-20"
+              />
+              <button
+                className="claim-button bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+                onClick={() => handleClaim(item._id, parseInt(item.quantity))}
+              >
+                Claim
+              </button>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
     </div>
   );
 }
