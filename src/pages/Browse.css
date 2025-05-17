@@ -31,7 +31,7 @@ html, body, #root {
         rgba(91, 87, 87, 0.45),
         rgba(98, 31, 88, 0.45)
       ),
-      url('/backgrounds/receivepage.jpg');
+      url('/background/browse.jpg');
 
     background-size: cover;
     background-position: center;
@@ -68,6 +68,7 @@ html, body, #root {
 
 /* Food item card */
 .food-card {
+    position: relative; /* ← This is key */
     background: rgba(255, 255, 255, 0.92);
     border-radius: 16px;
     padding: 24px 32px;
@@ -125,15 +126,6 @@ html, body, #root {
 .error {
     color: #f44336;
 }
-.food-card {
-  position: relative; /* ← This is key */
-  background: #fff;
-  border-radius: 10px;
-  padding: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin: 16px 0;
-  overflow: hidden;
-}
 
 .claim-button {
   position: absolute;
@@ -152,6 +144,7 @@ html, body, #root {
 .claim-button:hover {
   background-color: #218838;
 }
+
 .mini-map {
   margin-top: 10px;
   border: 1px solid #ccc;
