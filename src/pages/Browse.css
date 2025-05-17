@@ -1,0 +1,160 @@
+/* Global reset - add this to your main CSS or index.css */
+html, body, #root {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    background-color: #1e1e1e;
+    color: #ddd5d5;
+}
+
+/* Browse page container */
+.browse-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 180px 20px 60px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    max-width: 100%;
+    overflow-x: hidden;
+
+    background:
+      linear-gradient(
+        rgba(91, 87, 87, 0.45),
+        rgba(98, 31, 88, 0.45)
+      ),
+      url('/backgrounds/receivepage.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+}
+
+/* Heading style */
+.browse-heading {
+    font-size: 3rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    max-width: 900px;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+/* Search bar */
+.search-input {
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    width: 80%;
+    max-width: 500px;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+}
+
+/* Food item card */
+.food-card {
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 16px;
+    padding: 24px 32px;
+    margin: 1.2rem auto;
+    width: 90%;
+    max-width: 620px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+}
+
+.food-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+.food-title {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: #5e17eb;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.food-description {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+    line-height: 1.5;
+}
+
+.food-donor {
+    font-size: 1rem;
+    color: #555;
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
+.food-expiry {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #b80000;
+    margin-top: 0.3rem;
+}
+
+/* Loading and error messages */
+.loading,
+.error {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 3rem;
+    color: #f0c040;
+}
+
+.error {
+    color: #f44336;
+}
+.food-card {
+  position: relative; /* ← This is key */
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 16px 0;
+  overflow: hidden;
+}
+
+.claim-button {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.claim-button:hover {
+  background-color: #218838;
+}
+.mini-map {
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+}
