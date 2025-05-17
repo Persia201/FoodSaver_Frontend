@@ -13,7 +13,7 @@ function Signup({ onSignup }) {
     e.preventDefault();
     setMessage('');
     try {
-      const response = await fetch('http://localhost:5001/api/users/register', {
+      const response = await fetch('https://food-saver-frontend.vercel.app/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password }),
