@@ -21,7 +21,7 @@ function Browse() {
   const [error, setError] = useState(null);
   const [claimQuantity, setClaimQuantity] = useState({});
 
-  const BASE_URL = import.meta.env.VITE_APP_URL;
+const BASE_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetch(`${BASE_URL}/api/food`)
